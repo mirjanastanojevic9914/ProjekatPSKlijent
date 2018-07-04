@@ -5,6 +5,17 @@
  */
 package forme.login;
 
+import com.sun.security.ntlm.Client;
+import communication.CommunicationServer;
+import controller.Controller;
+import domain.Doctor;
+import forme.main.MainForm;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Mira
@@ -16,6 +27,7 @@ public class DoctorLogin extends javax.swing.JFrame {
      */
     public DoctorLogin() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -38,6 +50,8 @@ public class DoctorLogin extends javax.swing.JFrame {
         txtIpAddress = new javax.swing.JTextField();
         txtPort = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        pswPassword = new javax.swing.JPasswordField();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuConfiguration = new javax.swing.JMenu();
         database = new javax.swing.JMenuItem();
@@ -59,6 +73,13 @@ public class DoctorLogin extends javax.swing.JFrame {
         jLabel6.setText("Port:");
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Password:");
 
         menuConfiguration.setText("Configuration");
 
@@ -80,28 +101,32 @@ public class DoctorLogin extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6))
+                                    .addGap(45, 45, 45)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtIpAddress)
+                                            .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(75, 75, 75)
+                                    .addComponent(jLabel4)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7))
+                                .addGap(53, 53, 53)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtName)
-                                    .addComponent(txtSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtIpAddress)
-                                        .addComponent(txtPort, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
-                                    .addComponent(btnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jLabel4)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                                    .addComponent(txtSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                                    .addComponent(pswPassword))))))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,7 +141,11 @@ public class DoctorLogin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7)
+                    .addComponent(pswPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -128,11 +157,43 @@ public class DoctorLogin extends javax.swing.JFrame {
                     .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnLogin)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        try {                                             
+            String name = txtName.getText().trim();
+            String surname = txtSurname.getText().trim();
+            String password = pswPassword.getText().trim();
+            String ipAdrees = txtIpAddress.getText().trim();
+            int port;
+            try {
+                port = Integer.parseInt(txtPort.getText().trim());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Enter the number of port");
+                return;
+            }
+            
+            connect(ipAdrees, port);
+            
+            if (doValidation(name, surname, password) == true) {
+                Doctor d = Controller.getInstanca().getCurrentDoctor();
+               
+                JFrame mainForm = new MainForm();
+                mainForm.setVisible(true);
+                dispose();
+                JOptionPane.showMessageDialog(mainForm, "Succesfull loged in!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Combination of atributes incorrect");
+                disconnect();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,11 +209,47 @@ public class DoctorLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuConfiguration;
+    private javax.swing.JPasswordField pswPassword;
     private javax.swing.JTextField txtIpAddress;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPort;
     private javax.swing.JTextField txtSurname;
     // End of variables declaration//GEN-END:variables
+
+public boolean doValidation(String name, String surname, String password) {
+        try {
+            Doctor doctor = new Doctor();
+            doctor.setName(name);
+            doctor.setSurname(surname);
+            doctor.setPassword(password);
+            
+            doctor = Controller.getInstanca().loginDoctor(doctor);
+            Controller.getInstanca().setCurrentDoctor(doctor);
+            return true;
+        } catch (Exception ex) {
+
+            return false;
+        }
+    }
+
+    private void connect(String ipAdress, int port) throws Exception {
+        CommunicationServer.getInstanca().connect(ipAdress, port);
+    }
+
+    private void disconnect() {
+        try {
+            CommunicationServer.getInstanca().getSocket().close();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error! Application has been closed!");
+            dispose();
+            Logger.getLogger(DoctorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Disconnected! ");
+    }
+
+
+
 }

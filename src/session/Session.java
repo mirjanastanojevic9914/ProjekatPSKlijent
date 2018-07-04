@@ -27,6 +27,19 @@ public class Session {
         return instance;
     }
 
+     public void put(String key, Object value) {
+        map.put(key, value);
+    }
+    
+    public Object get(String key) {
+        return map.get(key);
+    }
+    
+    public void remove(String key) {
+        map.remove(key);
+    }
+    
+    
     public Map<String, Object> getMap() {
         return map;
     }

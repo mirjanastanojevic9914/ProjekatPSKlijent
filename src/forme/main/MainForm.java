@@ -5,6 +5,13 @@
  */
 package forme.main;
 
+import controller.Controller;
+import form.patient.FormAddPatient;
+
+import form.patient.FormSearchPatient;
+import java.awt.BorderLayout;
+import javax.swing.JDialog;
+
 /**
  *
  * @author Mira
@@ -16,6 +23,8 @@ public class MainForm extends javax.swing.JFrame {
      */
     public MainForm() {
         initComponents();
+         setLocationRelativeTo(null);
+         this.setTitle("Loged in doctor: " + Controller.getInstanca().getCurrentDoctor().toString());
     }
 
     /**
@@ -34,9 +43,8 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         menuPatient = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        menuItemAddPatient = new javax.swing.JMenuItem();
+        menuItemSearchPatient = new javax.swing.JMenuItem();
         menuExamination = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -66,19 +74,21 @@ public class MainForm extends javax.swing.JFrame {
 
         menuPatient.setText("Patient");
 
-        jMenuItem4.setText(" Add new patient");
-        menuPatient.add(jMenuItem4);
-
-        jMenuItem5.setText(" Search patients");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menuItemAddPatient.setText(" Add new patient");
+        menuItemAddPatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menuItemAddPatientActionPerformed(evt);
             }
         });
-        menuPatient.add(jMenuItem5);
+        menuPatient.add(menuItemAddPatient);
 
-        jMenuItem6.setText("Update patient");
-        menuPatient.add(jMenuItem6);
+        menuItemSearchPatient.setText(" Search patients");
+        menuItemSearchPatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSearchPatientActionPerformed(evt);
+            }
+        });
+        menuPatient.add(menuItemSearchPatient);
 
         jMenuBar1.add(menuPatient);
 
@@ -124,9 +134,25 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void menuItemSearchPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSearchPatientActionPerformed
+        FormSearchPatient f = new FormSearchPatient();
+        JDialog d = new JDialog(this, "Searching for patient", true);
+        d.setLayout(new BorderLayout());
+        d.add(f, BorderLayout.CENTER);
+        d.pack();
+        d.setLocationRelativeTo(null);
+        d.setVisible(true);
+    }//GEN-LAST:event_menuItemSearchPatientActionPerformed
+
+    private void menuItemAddPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddPatientActionPerformed
+        FormAddPatient f = new FormAddPatient();
+        JDialog d = new JDialog(this, "Adding new patient", true);
+        d.setLayout(new BorderLayout());
+        d.add(f, BorderLayout.CENTER);
+        d.pack();
+        d.setLocationRelativeTo(null);
+        d.setVisible(true);
+    }//GEN-LAST:event_menuItemAddPatientActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,18 +195,19 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu menuDoctor;
     private javax.swing.JMenu menuExamination;
     private javax.swing.JMenu menuIllness;
+    private javax.swing.JMenuItem menuItemAddPatient;
+    private javax.swing.JMenuItem menuItemSearchPatient;
     private javax.swing.JMenu menuMedication;
     private javax.swing.JMenu menuPatient;
     private javax.swing.JMenu menuRecipe;
     private javax.swing.JMenu menuRefer;
     // End of variables declaration//GEN-END:variables
+
+   
 }
