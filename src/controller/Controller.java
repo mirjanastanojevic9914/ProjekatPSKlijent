@@ -7,6 +7,7 @@ package controller;
 
 import communication.CommunicationServer;
 import domain.Doctor;
+import domain.DoctorType;
 import domain.GenericDomainObject;
 import domain.Patient;
 import java.util.ArrayList;
@@ -122,6 +123,65 @@ public class Controller {
         }
         throw new Exception("Datas of the patient have not found!");
     }
+
+    public ArrayList<DoctorType> getDoctorTypesForCB() throws Exception{
+         ResponseObject responseObject = sendRequest(IOperation.GET_LIST_DOCTOR_TYPES_CB, null);
+        if (responseObject.getResponseStatus() == EnumResponseStatus.OK) {
+            List<GenericDomainObject> gdoList = (ArrayList<GenericDomainObject>) responseObject.getResponse();
+            ArrayList<DoctorType> list = new ArrayList<>();
+            for (GenericDomainObject gdo : gdoList) {
+                list.add((DoctorType) gdo);
+            }
+            return list;
+        }
+        throw new Exception("Error while getting list of doctor types");
+    }
+
+    public String saveDoctor(Doctor doctor) throws Exception{
+         ResponseObject responseObject = sendRequest(IOperation.SAVE_DOCTOR, doctor);
+        
+
+
+        if (responseObject.getResponseStatus() == EnumResponseStatus.OK) {
+            return "Succesfully saved doctor!";
+        }
+        throw new Exception("Error, doctor can't be saved!");
+    }
+
+    public Doctor getDoctor(Doctor d) throws Exception {
+         ResponseObject responseObject = sendRequest(IOperation.FIND_DOCTOR_FOR_DETAILS, d);
+        if (responseObject.getResponseStatus() == EnumResponseStatus.OK) {
+            
+            Doctor doctor = (Doctor) responseObject.getResponse();
+            return doctor;
+        }
+        throw new Exception("Datas of the doctor have not found!");
+    }
+
+    public String updateDoctor(Doctor doctor)  throws Exception{
+         ResponseObject responseObject = sendRequest(IOperation.UPDATE_DOCTOR, doctor);
+
+        if (responseObject.getResponseStatus() == EnumResponseStatus.OK) {
+            return "Succesfully updated doctor!";
+        }
+        throw new Exception("Error while updating doctor!");
+    }
+
+    public List<GenericDomainObject> getDoctorsWithCriteria(String criteria)  throws Exception{
+         List<Object> parametars = new ArrayList<>();
+        parametars.add(criteria);
+        parametars.add(new Doctor());
+
+        ResponseObject responseObject = sendRequest(IOperation.GET_DOCTORS_WITH_CRITERIA, parametars);
+        if (responseObject.getResponseStatus() == EnumResponseStatus.OK) {
+            List<GenericDomainObject> gdoList = (ArrayList<GenericDomainObject>) responseObject.getResponse();
+
+            return gdoList;
+        }
+        throw new Exception("There are no doctors with that critetia! ");
+    }
+
+    
     
     
 }

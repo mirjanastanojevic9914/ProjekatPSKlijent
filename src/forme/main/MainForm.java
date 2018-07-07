@@ -6,6 +6,8 @@
 package forme.main;
 
 import controller.Controller;
+import form.doctor.FormAddDoctor;
+import form.doctor.FormSearchDoctor;
 import form.patient.FormAddPatient;
 
 import form.patient.FormSearchPatient;
@@ -36,12 +38,11 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuDoctor = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        menuItemAddDoctor = new javax.swing.JMenuItem();
+        menuItemSearchDoctor = new javax.swing.JMenuItem();
         menuPatient = new javax.swing.JMenu();
         menuItemAddPatient = new javax.swing.JMenuItem();
         menuItemSearchPatient = new javax.swing.JMenuItem();
@@ -52,23 +53,32 @@ public class MainForm extends javax.swing.JFrame {
         menuRefer = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         menuMedication = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         menuRecipe = new javax.swing.JMenu();
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         menuDoctor.setText("Doctor");
 
-        jMenuItem1.setText("Add new doctor");
-        menuDoctor.add(jMenuItem1);
+        menuItemAddDoctor.setText("Add new doctor");
+        menuItemAddDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAddDoctorActionPerformed(evt);
+            }
+        });
+        menuDoctor.add(menuItemAddDoctor);
 
-        jMenuItem2.setText("Search doctors");
-        menuDoctor.add(jMenuItem2);
-
-        jMenuItem3.setText("Update doctor");
-        menuDoctor.add(jMenuItem3);
-
-        jMenuItem7.setText("Add new doctor type");
-        menuDoctor.add(jMenuItem7);
+        menuItemSearchDoctor.setText("Search doctors");
+        menuItemSearchDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSearchDoctorActionPerformed(evt);
+            }
+        });
+        menuDoctor.add(menuItemSearchDoctor);
 
         jMenuBar1.add(menuDoctor);
 
@@ -113,6 +123,26 @@ public class MainForm extends javax.swing.JFrame {
         jMenuBar1.add(menuRefer);
 
         menuMedication.setText("Medication");
+
+        jMenuItem5.setText("Add new medication");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        menuMedication.add(jMenuItem5);
+
+        jMenuItem6.setText("Search medications");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        menuMedication.add(jMenuItem6);
+
+        jMenuItem11.setText("Delete medication");
+        menuMedication.add(jMenuItem11);
+
         jMenuBar1.add(menuMedication);
 
         menuRecipe.setText("Recipe");
@@ -154,6 +184,34 @@ public class MainForm extends javax.swing.JFrame {
         d.setVisible(true);
     }//GEN-LAST:event_menuItemAddPatientActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void menuItemAddDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAddDoctorActionPerformed
+        FormAddDoctor f = new FormAddDoctor();
+        JDialog d = new JDialog(this, "Adding new doctor", true);
+        d.setLayout(new BorderLayout());
+        d.add(f, BorderLayout.CENTER);
+        d.pack();
+        d.setLocationRelativeTo(null);
+        d.setVisible(true);
+    }//GEN-LAST:event_menuItemAddDoctorActionPerformed
+
+    private void menuItemSearchDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSearchDoctorActionPerformed
+        FormSearchDoctor f = new FormSearchDoctor();
+        JDialog d = new JDialog(this, "Searching for doctor", true);
+        d.setLayout(new BorderLayout());
+        d.add(f, BorderLayout.CENTER);
+        d.pack();
+        d.setLocationRelativeTo(null);
+        d.setVisible(true);
+    }//GEN-LAST:event_menuItemSearchDoctorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -191,17 +249,19 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu menuDoctor;
     private javax.swing.JMenu menuExamination;
     private javax.swing.JMenu menuIllness;
+    private javax.swing.JMenuItem menuItemAddDoctor;
     private javax.swing.JMenuItem menuItemAddPatient;
+    private javax.swing.JMenuItem menuItemSearchDoctor;
     private javax.swing.JMenuItem menuItemSearchPatient;
     private javax.swing.JMenu menuMedication;
     private javax.swing.JMenu menuPatient;
